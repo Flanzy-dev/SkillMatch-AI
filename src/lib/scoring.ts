@@ -6,7 +6,8 @@ import type { Profile } from "./schemas/profile";
  * score = 100 * (0.6 * skillOverlap + 0.4 * textSimilarity)
  */
 export const WEIGHTS = { skill: 0.6, text: 0.4 } as const;
-export const MATCH_THRESHOLD = 20;
+/** A job is listed when the profile has at least this many of its skills. */
+export const MIN_MATCHED = 1;
 export const TOP_N = 10;
 
 /**
@@ -46,17 +47,27 @@ const tokens = (text: string) =>
   new Set(
     text
       .toLowerCase()
-      .split(/[^a-z0-9+#.]+/)
+      .split(/[^\p{L}\p{N}+#.]+/u)
       .filter((t) => t.length > 2),
   );
 
-function textSimilarity(profile: Profile, job: Job): number {
-  const source = tokens(`${profile.experience} ${profile.projects} ${profile.education}`);
-  const target = tokens(`${job.title} ${job.summary.en}`);
+function overlap(source: Set<string>, target: Set<string>): number {
   if (target.size === 0) return 0;
   let hit = 0;
   for (const t of target) if (source.has(t)) hit++;
   return Math.min(1, hit / target.size);
+}
+
+/**
+ * Compares the profile text with the listing in both languages and keeps the better match,
+ * so a profile written in Indonesian (the default locale) is not penalised.
+ */
+function textSimilarity(profile: Profile, job: Job): number {
+  const source = tokens(`${profile.experience} ${profile.projects} ${profile.education}`);
+  return Math.max(
+    overlap(source, tokens(`${job.title} ${job.summary.id}`)),
+    overlap(source, tokens(`${job.title} ${job.summary.en}`)),
+  );
 }
 
 export function reasonFor(score: number): ReasonCode {
@@ -105,7 +116,8 @@ export function scoreJob(profile: Profile, job: Job): MatchResult {
 export function rankJobs(profile: Profile, jobs: Job[]): MatchResult[] {
   return jobs
     .map((j) => scoreJob(profile, j))
-    .filter((r) => r.score >= MATCH_THRESHOLD)
+    // Every listing with at least one matching skill is shown; a low score is a direction, not a reason to hide it.
+    .filter((r) => r.matchedSkills.length >= MIN_MATCHED)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
     .slice(0, TOP_N);
 }

@@ -2,9 +2,9 @@
 
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Loader2 } from "lucide-react";
+import { Info, Loader2 } from "lucide-react";
 import { Link, useRouter } from "@/i18n/routing";
-import { api } from "@/lib/api/mock";
+import { api, DEMO_EXTRACTION } from "@/lib/api/mock";
 import { ApiError } from "@/lib/api/client";
 import { useMatchFlow } from "@/hooks/useMatchFlow";
 import { Button, buttonClass } from "@/components/ui/Button";
@@ -46,6 +46,17 @@ export default function UploadPage() {
       <Stepper current={1} />
       <h1 className="font-display text-3xl font-bold tracking-tight">{t("title")}</h1>
       <p className="mt-2 text-muted">{t("subtitle")}</p>
+      {DEMO_EXTRACTION && (
+        <p className="mt-4 flex items-start gap-2 rounded-lg bg-brand-tint p-3 text-sm text-text">
+          <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-brand-text" />
+          <span>
+            {t("demo")}{" "}
+            <Link href="/review" className="font-medium text-brand-text underline underline-offset-4">
+              {t("manualLink")}
+            </Link>
+          </span>
+        </p>
+      )}
 
       <div className="mt-6">
         {phase === "extracting" ? (

@@ -24,7 +24,7 @@ export function CopyPlanButton({ skills, topTitle }: Props) {
       t("planHeading"),
       t("planFor", { title: topTitle }),
       "",
-      ...skills.map((s, i) => `${i + 1}. ${t("planLine", { skill: s.skill, count: s.jobs })}`),
+      ...skills.map((s, i) => `${i + 1}. ${s.jobs > 1 ? t("planLine", { skill: s.skill, count: s.jobs }) : s.skill}`),
       "",
       t("planNote"),
     ].join("\n");

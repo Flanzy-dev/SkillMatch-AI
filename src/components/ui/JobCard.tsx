@@ -55,6 +55,7 @@ export function JobCard({ result, rank, preview = false, featured = false }: Pro
           {m(`reason.${result.reason}`, {
             matched: result.matchedSkills.length,
             total: result.jobSkills.length,
+            missing: result.missingSkills.length,
           })}
         </p>
         <ScoreBreakdown result={result} compact />

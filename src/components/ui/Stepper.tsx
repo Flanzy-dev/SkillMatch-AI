@@ -31,6 +31,9 @@ export function Stepper({ current, skipFirst = false }: Props) {
     return n === current ? "current" : "upcoming";
   };
 
+  /** The road out of stop n is solid only if n was actually travelled, not skipped. */
+  const travelled = (n: number) => n < current && stateOf(n) !== "skipped";
+
   const nodeClass = (n: number, state: State) =>
     n === steps.length
       ? "bg-accent text-on-accent"
@@ -71,7 +74,7 @@ export function Stepper({ current, skipFirst = false }: Props) {
                 {n < steps.length && (
                   <span
                     className={`w-5 border-t-2 ${
-                      n < current ? "border-solid border-brand" : "border-dashed border-border-strong"
+                      travelled(n) ? "border-solid border-brand" : "border-dashed border-border-strong"
                     }`}
                   />
                 )}
@@ -120,7 +123,7 @@ export function Stepper({ current, skipFirst = false }: Props) {
                 <span
                   aria-hidden
                   className={`mx-3 w-12 border-t-2 ${
-                    n < current ? "border-solid border-brand" : "border-dashed border-border-strong"
+                    travelled(n) ? "border-solid border-brand" : "border-dashed border-border-strong"
                   }`}
                 />
               )}

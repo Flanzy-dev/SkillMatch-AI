@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Check, CircleAlert } from "lucide-react";
+import { Check, Route } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import type { MatchResult } from "@/lib/schemas/match";
 
@@ -33,7 +33,7 @@ export function JobRow({ result, rank }: { result: MatchResult; rank: number }) 
               {t("matchedCount", { count: result.matchedSkills.length })}
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <CircleAlert aria-hidden className="size-4 text-missing-text" />
+              <Route aria-hidden className="size-4 text-missing-text" />
               {t("missingCount", { count: result.missingSkills.length })}
             </span>
           </p>

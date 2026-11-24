@@ -17,6 +17,12 @@ function wait(ms: number, signal?: AbortSignal): Promise<void> {
   });
 }
 
+/**
+ * True while extractCv returns a built-in sample instead of reading the file. The UI says so
+ * on Upload and Review, so a sample profile is never presented as "read from your CV".
+ */
+export const DEMO_EXTRACTION = true;
+
 export const mockApi: Api = {
   async extractCv(file: File, opts: ApiOptions = {}) {
     await wait(1800, opts.signal);

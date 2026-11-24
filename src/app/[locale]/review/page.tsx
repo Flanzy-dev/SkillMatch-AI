@@ -4,10 +4,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { AlertCircle, ChevronDown, Plus } from "lucide-react";
+import { AlertCircle, ChevronDown, Info, Plus } from "lucide-react";
 import { z } from "zod";
 import { useRouter } from "@/i18n/routing";
-import { api } from "@/lib/api/mock";
+import { api, DEMO_EXTRACTION } from "@/lib/api/mock";
+import { closestSkill, isKnownSkill } from "@/lib/skills";
 import { allSkills, popularSkills } from "@/lib/mock-data/jobs";
 import { emptyProfile, profileSchema, type Profile } from "@/lib/schemas/profile";
 import { useMatchFlow } from "@/hooks/useMatchFlow";
@@ -51,6 +52,11 @@ export default function ReviewPage() {
   const skippedUpload = ready && source !== "cv";
   const sample = ready && source === "sample";
   const manual = skippedUpload && !sample;
+  // While extraction is mocked, a "CV" profile is really a sample: say so.
+  const demoCv = ready && source === "cv" && DEMO_EXTRACTION;
+  const unknown = skills.filter((s) => !isKnownSkill(s));
+  const [education, experience, projects] = watch(["education", "experience", "projects"]);
+  const hasDetails = Boolean(`${education}${experience}${projects}`.trim());
   const skillOptions = useMemo(() => allSkills().filter((s) => !has(skills, s)), [skills]);
   const suggestions = useMemo(
     () => popularSkills(12).filter((s) => !has(skills, s)).slice(0, 6),
@@ -70,6 +76,10 @@ export default function ReviewPage() {
     }
     if (next.length !== skills.length) setSkills(next);
     setNewSkill("");
+  }
+
+  function replaceSkill(from: string, to: string) {
+    setSkills(has(skills, to) ? skills.filter((x) => x !== from) : skills.map((x) => (x === from ? to : x)));
   }
 
   function removeSkill(skill: string) {
@@ -104,7 +114,7 @@ export default function ReviewPage() {
   const skillsError = formState.errors.skills
     ? err(formState.errors.skills.message ?? formState.errors.skills.root?.message)
     : undefined;
-  const title = skippedUpload
+  const title = skippedUpload || demoCv
     ? t("manualTitle")
     : skills.length
       ? t("foundTitle", { count: skills.length })
@@ -115,7 +125,13 @@ export default function ReviewPage() {
       <Stepper current={2} skipFirst={skippedUpload} />
       <h1 className="font-display text-3xl font-bold tracking-tight">{t("title")}</h1>
       <p className="mt-2 text-muted">
-        {sample ? t("subtitleSample") : manual ? t("subtitleManual") : t("subtitle")}
+        {sample
+          ? t("subtitleSample")
+          : manual
+            ? t("subtitleManual")
+            : demoCv
+              ? t("subtitleDemo")
+              : t("subtitle")}
       </p>
 
       <form
@@ -143,6 +159,8 @@ export default function ReviewPage() {
                 <li key={s}>
                   <SkillChip
                     size="lg"
+                    unknown={!isKnownSkill(s)}
+                    unknownLabel={t("unknownSr")}
                     label={s}
                     removeLabel={t("removeSkill", { skill: s })}
                     onRemove={() => removeSkill(s)}
@@ -152,6 +170,32 @@ export default function ReviewPage() {
             </ul>
           )}
           {skills.length === 0 && !skillsError && <p className="mt-4 text-sm">{t("noSkills")}</p>}
+          {unknown.length > 0 && (
+            <div className="mt-3 flex items-start gap-2 text-sm">
+              <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-muted" />
+              <div>
+                <p>
+                  {t("unknownNote", { skills: unknown.join(", ") })} {t("unknownScope")}
+                </p>
+                <ul className="-ml-2 flex flex-wrap gap-x-1">
+                  {unknown.map((s) => {
+                    const near = closestSkill(s);
+                    return near ? (
+                      <li key={s}>
+                        <button
+                          type="button"
+                          onClick={() => replaceSkill(s, near)}
+                          className="inline-flex min-h-11 items-center rounded-md px-2 font-medium text-brand-text hover:bg-brand-tint"
+                        >
+                          {t("didYouMean", { skill: s, suggestion: near })}
+                        </button>
+                      </li>
+                    ) : null;
+                  })}
+                </ul>
+              </div>
+            </div>
+          )}
           <div role="status" aria-live="polite" className="min-h-0">
             {removed && (
               <p className="mt-3 flex flex-wrap items-center gap-2 text-sm">
@@ -240,7 +284,8 @@ export default function ReviewPage() {
           )}
         </section>
 
-        <details className="group rounded-xl border border-border bg-surface px-5">
+        {/* Worth up to 40 points, so it opens by itself when it already has content. */}
+        <details open={hasDetails} className="group rounded-xl border border-border bg-surface px-5">
           <summary className="flex min-h-14 cursor-pointer items-center justify-between gap-3 py-3">
             <span>
               <span className="block font-medium">{t("details")}</span>

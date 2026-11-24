@@ -61,7 +61,27 @@ describe("score breakdown", () => {
   });
 });
 
+describe("text similarity", () => {
+  it("scores Indonesian profile text against the Indonesian summary", () => {
+    const job = jobs.find((j) => j.id === "job-02")!;
+    const id = scoreJob(
+      { ...emptyProfile, skills: ["SQL"], experience: "Membersihkan data, menulis query SQL, dan membuat dasbor." },
+      job,
+    );
+    expect(id.breakdown.textPoints).toBeGreaterThan(20);
+  });
+});
+
 describe("rankJobs", () => {
+  it("lists every job with at least one matching skill, even with a low score", () => {
+    const ranked = rankJobs({ ...emptyProfile, skills: ["JS", "Postgres"] }, jobs);
+    expect(ranked.length).toBeGreaterThan(0);
+    expect(ranked.every((r) => r.matchedSkills.length >= 1)).toBe(true);
+    const matched = ranked.flatMap((r) => r.matchedSkills);
+    expect(matched).toContain("JavaScript");
+    expect(matched).toContain("PostgreSQL");
+  });
+
   it("returns at most TOP_N results sorted by descending score", () => {
     const ranked = rankJobs(backend, jobs);
     expect(ranked.length).toBeLessThanOrEqual(TOP_N);

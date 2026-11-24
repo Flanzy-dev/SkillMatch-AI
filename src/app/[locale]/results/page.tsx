@@ -31,11 +31,13 @@ export default function ResultsPage() {
     <div className="mx-auto max-w-3xl">
       <Stepper current={3} skipFirst={source !== "cv"} />
       <h1 className="font-display text-3xl font-bold tracking-tight">{t("title")}</h1>
-      <p className="mt-2 text-muted">
-        {results.length < TOP_N && results.length > 0
-          ? t("few", { count: results.length })
-          : t("subtitle", { count: results.length })}
-      </p>
+      {results.length > 0 && (
+        <p className="mt-2 text-muted">
+          {results.length < TOP_N
+            ? t("few", { count: results.length })
+            : t("subtitle", { count: results.length })}
+        </p>
+      )}
       <p className="mt-2 flex items-start gap-1.5 text-sm text-muted">
         <Info aria-hidden className="mt-0.5 size-4 shrink-0" />
         {c("synthetic")}

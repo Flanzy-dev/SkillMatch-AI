@@ -198,7 +198,7 @@ test("compact result rows are announced once, with score and band in the link na
 test("landing route carries one sentence per step and the amber destination is last", async ({ page }) => {
   await page.goto("/id");
   const list = page.getByRole("list", { name: "Cara kerja" });
-  await expect(list.getByRole("heading")).toHaveText(["Unggah CV", "Periksa profil", "Lihat langkah belajar"]);
+  await expect(list.getByRole("heading")).toHaveText(["Unggah CV", "Tinjau profil", "Hasil dan langkah belajar"]);
   await expect(list.getByText("PDF, maksimal 5 MB")).toBeVisible();
 });
 
@@ -241,7 +241,7 @@ test("the learning plan can be copied without storing anything", async ({ page, 
   await expect(panel.getByRole("status")).toHaveText(/disalin/);
   const text = await page.evaluate(() => navigator.clipboard.readText());
   expect(text).toContain("Rencana belajar saya (SkillMatch AI)");
-  expect(text).toMatch(/1\. .+: dibutuhkan di \d+ lowongan/);
+  expect(text).toMatch(/\n1\. \S/);
 });
 
 test("the name is optional and common spellings match the canonical skill", async ({ page }) => {
@@ -252,6 +252,43 @@ test("the name is optional and common spellings match the canonical skill", asyn
   await page.getByRole("button", { name: "Cari pekerjaan yang cocok" }).click();
   await expect(page.getByRole("heading", { name: "Lowongan terdekat dengan profil Anda" })).toBeVisible({ timeout: 10_000 });
   await expect(alerts(page)).toHaveCount(0);
+  // The aliases must actually match: JavaScript and PostgreSQL appear among the matched skills.
+  const matched = await page.evaluate(() => {
+    const flow = JSON.parse(sessionStorage.getItem("skillmatch.flow.v2") ?? "{}");
+    return (flow.results ?? []).flatMap((r: { matchedSkills: string[] }) => r.matchedSkills);
+  });
+  expect(matched).toContain("JavaScript");
+  expect(matched).toContain("PostgreSQL");
+  await expect(page.getByText(/0 lowongan/)).toHaveCount(0);
+});
+
+test("the CV path says it is a demo instead of claiming to read the CV", async ({ page }) => {
+  await page.goto("/id/upload");
+  await expect(page.getByText(/Mode demo: CV belum benar-benar dibaca/)).toBeVisible();
+  await page.locator('input[type="file"]').setInputFiles(pdf);
+  await expect(page.getByRole("heading", { name: "Tinjau profil Anda" })).toBeVisible({ timeout: 10_000 });
+  await expect(page.getByText(/Mode demo: CV Anda belum benar-benar dibaca/)).toBeVisible();
+  await expect(page.getByText("yang kami baca dari CV Anda")).toHaveCount(0);
+});
+
+test("skills no listing asks for are flagged, with a suggestion when one is close", async ({ page }) => {
+  await page.goto("/id/review");
+  const add = page.getByLabel("Tambah keterampilan");
+  await add.fill("Canva, Postgre");
+  await page.getByRole("button", { name: "Tambah", exact: true }).click();
+  await expect(page.getByText(/Belum ada di lowongan contoh, jadi belum menambah skor: Canva, Postgre/)).toBeVisible();
+  await page.getByRole("button", { name: "Ganti Postgre dengan PostgreSQL" }).click();
+  await expect(page.getByRole("button", { name: "Hapus keterampilan PostgreSQL" })).toBeVisible();
+  await expect(page.getByText(/belum menambah skor: Canva\./)).toBeVisible();
+  await expectNoA11yViolations(page);
+});
+
+test("the experience and projects section opens by itself when it has content", async ({ page }) => {
+  await page.goto("/id");
+  await page.getByRole("button", { name: "Coba dengan profil contoh" }).click();
+  await expect(page.getByRole("heading", { name: "Tinjau profil Anda" })).toBeVisible();
+  await expect(page.locator("details")).toHaveAttribute("open", "");
+  await expect(page.getByText("Pendidikan, pengalaman, dan proyek (hingga 40 poin)")).toBeVisible();
 });
 
 for (const width of [360, 375]) {

@@ -35,9 +35,9 @@
     "stepsLabel": "How it works",
     "step1": "Upload your CV",
     "step1Desc": "PDF, up to 5 MB. No CV? Enter your profile yourself.",
-    "step2": "Check your profile",
+    "step2": "Review profile",
     "step2Desc": "Fix any skill we misread and add the ones we missed.",
-    "step3": "See what to learn",
+    "step3": "Results and what to learn",
     "step3Desc": "Your closest jobs, why each scored as it did, and the skills to learn.",
     "previewLabel": "Sample of the results view. Synthetic data, not a real opening.",
     "sampleCompany": "Sample Company"
@@ -57,7 +57,7 @@
     "dropHint": "PDF only, up to 5 MB",
     "chooseFile": "Choose PDF file",
     "extracting": "Reading your CV...",
-    "extractingHint": "Usually takes under 15 seconds.",
+    "extractingHint": "Usually just a few seconds.",
     "cancel": "Cancel",
     "retry": "Try again",
     "manualPrompt": "No CV in PDF format?",
@@ -67,7 +67,8 @@
       "type": "The file must be a PDF.",
       "size": "The file is larger than 5 MB.",
       "extract": "We could not read this CV. Try again or enter your profile manually."
-    }
+    },
+    "demo": "Demo mode: your CV is not actually read yet. After upload, a sample profile is loaded. For results that fit you:"
   },
   "Review": {
     "title": "Review your profile",
@@ -79,8 +80,8 @@
     "emptyTitle": "No skills found yet",
     "manualTitle": "Your skills",
     "skillsHint": "These skills are what gets matched against jobs.",
-    "details": "Other details (optional)",
-    "detailsHint": "Education, experience, and projects help refine the results.",
+    "details": "Education, experience, and projects (up to 40 points)",
+    "detailsHint": "Compared with the job descriptions. Write in Indonesian or English.",
     "education": "Education",
     "experience": "Work experience",
     "projects": "Projects",
@@ -101,18 +102,23 @@
       "skills": "Add at least one skill."
     },
     "nameHelper": "Optional. Your name is not used for the score.",
-    "skillOptions": "Skills from the job listings"
+    "skillOptions": "Skills from the job listings",
+    "subtitleDemo": "Demo mode: your CV was not actually read, so this is a sample profile. Replace it with your own skills before matching.",
+    "unknownNote": "Not in the sample listings yet, so they add no points: {skills}.",
+    "unknownScope": "The sample listings are mostly technology roles.",
+    "didYouMean": "Replace {skill} with {suggestion}",
+    "unknownSr": "not in the sample listings"
   },
   "Match": {
     "band": {
-      "strong": "Strong fit",
-      "partial": "Partial fit",
-      "weak": "A lot to learn"
+      "strong": "Good fit",
+      "partial": "Partial",
+      "weak": "Needs more learning"
     },
     "reason": {
       "strong": "You already meet {matched} of {total} required skills.",
       "partial": "You meet {matched} of {total} required skills. The rest can be learned.",
-      "weak": "You meet {matched} of {total} skills so far. This job needs a lot of learning."
+      "weak": "You meet {matched} of {total} skills so far. {missing, plural, one {# more skill} other {# more skills}} to learn."
     },
     "scoreLabel": "Match score",
     "outOf": "/100",
@@ -134,8 +140,8 @@
   },
   "Results": {
     "title": "Jobs closest to your profile",
-    "subtitle": "Top {count, plural, one {# job} other {# jobs}}. The score shows how close your profile is, and the skills you do not have yet are your next steps.",
-    "few": "{count, plural, one {# job is} other {# jobs are}} close enough to your profile. Adding skills opens up more options.",
+    "subtitle": "Top {count, plural, one {# job} other {# jobs}} with at least one matching skill. The score shows how close your profile is, and the skills you do not have yet are your next steps.",
+    "few": "{count, plural, one {# job} other {# jobs}} with at least one matching skill. Adding skills opens up more options.",
     "rank": "Rank {rank}",
     "closest": "Closest to your profile",
     "openSteps": "See what to learn",
@@ -148,7 +154,7 @@
     "matched": "Skills you have",
     "missing": "Skills to learn",
     "editProfile": "Edit profile",
-    "emptyTitle": "No jobs are close enough yet",
+    "emptyTitle": "No sample listing asks for your skills yet.",
     "emptyHint": "Try adding skills or completing your experience.",
     "neededIn": "asked for in {count, plural, one {# job} other {# jobs}}",
     "copyPlan": "Copy learning plan",
@@ -168,7 +174,7 @@
     "allMet": "Your profile already meets every required skill. Check the other jobs in your results.",
     "haveTitle": "Skills you have",
     "noneMatched": "No matching skills yet.",
-    "escoNote": "Skill names are matched to the ESCO standard (the EU skills list), so \"JS\" and \"JavaScript\" count as the same.",
+    "escoNote": "Skill names follow ESCO-style labels (the EU skills list). Common spellings count as the same, so \"JS\" counts as \"JavaScript\".",
     "feedbackQuestion": "Was this match helpful?",
     "yes": "Yes",
     "no": "No",

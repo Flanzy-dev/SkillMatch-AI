@@ -35,9 +35,9 @@
     "stepsLabel": "Cara kerja",
     "step1": "Unggah CV",
     "step1Desc": "PDF, maksimal 5 MB. Tidak punya CV? Isi profil sendiri.",
-    "step2": "Periksa profil",
+    "step2": "Tinjau profil",
     "step2Desc": "Perbaiki keterampilan yang salah terbaca atau tambahkan yang kurang.",
-    "step3": "Lihat langkah belajar",
+    "step3": "Hasil dan langkah belajar",
     "step3Desc": "Lowongan terdekat, alasan skornya, dan keterampilan yang perlu dipelajari.",
     "previewLabel": "Contoh tampilan hasil. Data sintetis, bukan lowongan nyata.",
     "sampleCompany": "Perusahaan Contoh"
@@ -57,7 +57,7 @@
     "dropHint": "Hanya PDF, maksimal 5 MB",
     "chooseFile": "Pilih file PDF",
     "extracting": "Membaca CV Anda...",
-    "extractingHint": "Biasanya kurang dari 15 detik.",
+    "extractingHint": "Biasanya hanya beberapa detik.",
     "cancel": "Batal",
     "retry": "Coba lagi",
     "manualPrompt": "Tidak punya CV dalam bentuk PDF?",
@@ -67,7 +67,8 @@
       "type": "File harus berformat PDF.",
       "size": "Ukuran file melebihi 5 MB.",
       "extract": "CV tidak dapat dibaca. Coba lagi atau isi profil secara manual."
-    }
+    },
+    "demo": "Mode demo: CV belum benar-benar dibaca. Setelah diunggah, profil contoh yang dimuat. Untuk hasil yang sesuai dengan Anda:"
   },
   "Review": {
     "title": "Tinjau profil Anda",
@@ -79,8 +80,8 @@
     "emptyTitle": "Belum ada keterampilan yang ditemukan",
     "manualTitle": "Keterampilan Anda",
     "skillsHint": "Keterampilan inilah yang dicocokkan dengan lowongan.",
-    "details": "Detail lain (opsional)",
-    "detailsHint": "Pendidikan, pengalaman, dan proyek membantu menyempurnakan hasil.",
+    "details": "Pendidikan, pengalaman, dan proyek (hingga 40 poin)",
+    "detailsHint": "Dibandingkan dengan deskripsi lowongan. Boleh ditulis dalam bahasa Indonesia atau Inggris.",
     "education": "Pendidikan",
     "experience": "Pengalaman kerja",
     "projects": "Proyek",
@@ -101,7 +102,12 @@
       "skills": "Tambahkan minimal satu keterampilan."
     },
     "nameHelper": "Opsional. Nama tidak dipakai untuk menghitung skor.",
-    "skillOptions": "Daftar keterampilan dari lowongan"
+    "skillOptions": "Daftar keterampilan dari lowongan",
+    "subtitleDemo": "Mode demo: CV Anda belum benar-benar dibaca, jadi ini profil contoh. Ganti dengan keterampilan Anda sendiri sebelum mencocokkan.",
+    "unknownNote": "Belum ada di lowongan contoh, jadi belum menambah skor: {skills}.",
+    "unknownScope": "Lowongan contoh sebagian besar bidang teknologi.",
+    "didYouMean": "Ganti {skill} dengan {suggestion}",
+    "unknownSr": "belum ada di lowongan contoh"
   },
   "Match": {
     "band": {
@@ -112,7 +118,7 @@
     "reason": {
       "strong": "Anda sudah memenuhi {matched} dari {total} keterampilan yang dibutuhkan.",
       "partial": "Anda memenuhi {matched} dari {total} keterampilan yang dibutuhkan. Sisanya bisa dipelajari.",
-      "weak": "Anda baru memenuhi {matched} dari {total} keterampilan. Lowongan ini butuh banyak belajar."
+      "weak": "Anda baru memenuhi {matched} dari {total} keterampilan. Ada {missing, plural, other {# keterampilan}} lagi untuk dipelajari."
     },
     "scoreLabel": "Skor kecocokan",
     "outOf": "/100",
@@ -134,8 +140,8 @@
   },
   "Results": {
     "title": "Lowongan terdekat dengan profil Anda",
-    "subtitle": "{count, plural, other {# lowongan}} teratas. Skor menunjukkan seberapa dekat profil Anda, dan keterampilan yang belum ada menjadi langkah belajar berikutnya.",
-    "few": "Ada {count, plural, other {# lowongan}} yang cukup dekat dengan profil Anda. Menambah keterampilan membuka lebih banyak pilihan.",
+    "subtitle": "{count, plural, other {# lowongan}} teratas dengan setidaknya satu keterampilan yang cocok. Skor menunjukkan seberapa dekat profil Anda, dan keterampilan yang belum ada menjadi langkah belajar berikutnya.",
+    "few": "{count, plural, other {# lowongan}} dengan setidaknya satu keterampilan yang cocok. Menambah keterampilan membuka lebih banyak pilihan.",
     "rank": "Peringkat {rank}",
     "closest": "Paling dekat dengan profil Anda",
     "openSteps": "Lihat langkah belajar",
@@ -148,7 +154,7 @@
     "matched": "Sudah Anda kuasai",
     "missing": "Perlu dipelajari",
     "editProfile": "Ubah profil",
-    "emptyTitle": "Belum ada lowongan yang cukup dekat",
+    "emptyTitle": "Belum ada lowongan contoh yang meminta keterampilan Anda.",
     "emptyHint": "Coba tambahkan keterampilan atau lengkapi pengalaman Anda.",
     "neededIn": "dibutuhkan di {count, plural, other {# lowongan}}",
     "copyPlan": "Salin rencana belajar",
@@ -168,7 +174,7 @@
     "allMet": "Profil Anda sudah memenuhi semua keterampilan yang dibutuhkan. Lihat lowongan lain di daftar hasil.",
     "haveTitle": "Sudah Anda kuasai",
     "noneMatched": "Belum ada keterampilan yang cocok.",
-    "escoNote": "Nama keterampilan disamakan dengan standar ESCO (daftar keterampilan dari Uni Eropa), sehingga \"JS\" dan \"JavaScript\" dihitung sama.",
+    "escoNote": "Nama keterampilan mengikuti label bergaya ESCO (daftar keterampilan Uni Eropa). Ejaan umum disamakan, misalnya \"JS\" dihitung sebagai \"JavaScript\".",
     "feedbackQuestion": "Apakah kecocokan ini membantu?",
     "yes": "Ya",
     "no": "Tidak",

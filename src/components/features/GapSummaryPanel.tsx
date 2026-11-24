@@ -43,7 +43,7 @@ export function GapSummaryPanel({ summary }: { summary: GapSummary }) {
           >
             <span className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2">
               <SkillChip label={skill} tone="missing" />
-              <span className="text-sm text-muted">{t("neededIn", { count: jobs })}</span>
+              {jobs > 1 && <span className="text-sm text-muted">{t("neededIn", { count: jobs })}</span>}
             </span>
             <a
               href={learnUrl(skill, locale)}
