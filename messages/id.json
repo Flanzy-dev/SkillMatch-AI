@@ -1,0 +1,182 @@
+{
+  "Meta": {
+    "title": "SkillMatch AI",
+    "description": "Unggah CV, lihat lowongan yang paling dekat dengan keterampilan Anda, alasan skornya, dan keterampilan yang perlu dipelajari berikutnya.",
+    "ogAlt": "SkillMatch AI: tahu yang cocok, tahu yang perlu dipelajari."
+  },
+  "Common": {
+    "skipToContent": "Lewati ke konten utama",
+    "brand": "SkillMatch AI",
+    "tagline": "Tahu yang cocok. Tahu yang perlu dipelajari.",
+    "language": "Bahasa",
+    "theme": "Tema",
+    "themeLight": "Terang",
+    "themeDark": "Gelap",
+    "menu": "Menu",
+    "closeMenu": "Tutup menu",
+    "synthetic": "Contoh: lowongan dan perusahaan di sini sintetis, bukan lowongan nyata."
+  },
+  "Nav": {
+    "home": "Beranda",
+    "upload": "Unggah CV",
+    "results": "Hasil",
+    "primary": "Navigasi utama"
+  },
+  "Footer": {
+    "note": "Prototipe MVP. Data lowongan bersifat sintetis dan bukan lowongan nyata."
+  },
+  "Landing": {
+    "title": "Temukan pekerjaan yang cocok dengan <mark>keterampilan</mark> Anda",
+    "subtitle": "Bingung mau belajar apa dulu? Unggah CV Anda. AI membaca keterampilan Anda, lalu menunjukkan lowongan yang paling dekat dan keterampilan yang perlu dipelajari berikutnya.",
+    "ctaPrimary": "Unggah CV",
+    "ctaSample": "Coba dengan profil contoh",
+    "ctaManual": "Isi profil manual",
+    "privacy": "CV Anda tidak disimpan. Hanya ada di sesi browser ini.",
+    "stepsLabel": "Cara kerja",
+    "step1": "Unggah CV",
+    "step1Desc": "PDF, maksimal 5 MB. Tidak punya CV? Isi profil sendiri.",
+    "step2": "Periksa profil",
+    "step2Desc": "Perbaiki keterampilan yang salah terbaca atau tambahkan yang kurang.",
+    "step3": "Lihat langkah belajar",
+    "step3Desc": "Lowongan terdekat, alasan skornya, dan keterampilan yang perlu dipelajari.",
+    "previewLabel": "Contoh tampilan hasil. Data sintetis, bukan lowongan nyata.",
+    "sampleCompany": "Perusahaan Contoh"
+  },
+  "Stepper": {
+    "label": "Langkah pencarian",
+    "upload": "Unggah",
+    "review": "Tinjau profil",
+    "results": "Hasil",
+    "compact": "Langkah {current} dari {total}",
+    "skipped": "dilewati"
+  },
+  "Upload": {
+    "title": "Unggah CV Anda",
+    "subtitle": "AI akan membaca CV dan mengisi profil Anda. Anda tetap bisa memperbaikinya sebelum dicocokkan.",
+    "dropTitle": "Tarik file PDF ke sini",
+    "dropHint": "Hanya PDF, maksimal 5 MB",
+    "chooseFile": "Pilih file PDF",
+    "extracting": "Membaca CV Anda...",
+    "extractingHint": "Biasanya kurang dari 15 detik.",
+    "cancel": "Batal",
+    "retry": "Coba lagi",
+    "manualPrompt": "Tidak punya CV dalam bentuk PDF?",
+    "manualLink": "Isi profil secara manual",
+    "privacy": "CV Anda tidak disimpan. Hanya ada di sesi browser ini.",
+    "error": {
+      "type": "File harus berformat PDF.",
+      "size": "Ukuran file melebihi 5 MB.",
+      "extract": "CV tidak dapat dibaca. Coba lagi atau isi profil secara manual."
+    }
+  },
+  "Review": {
+    "title": "Tinjau profil Anda",
+    "subtitle": "Periksa apa yang kami baca dari CV Anda, lalu tambah atau hapus keterampilan.",
+    "subtitleManual": "Isi keterampilan Anda untuk mulai mencocokkan dengan lowongan.",
+    "subtitleSample": "Ini profil contoh. Ganti dengan keterampilan Anda sendiri sebelum mencocokkan.",
+    "name": "Nama",
+    "foundTitle": "Kami menemukan {count, plural, other {# keterampilan}}",
+    "emptyTitle": "Belum ada keterampilan yang ditemukan",
+    "manualTitle": "Keterampilan Anda",
+    "skillsHint": "Keterampilan inilah yang dicocokkan dengan lowongan.",
+    "details": "Detail lain (opsional)",
+    "detailsHint": "Pendidikan, pengalaman, dan proyek membantu menyempurnakan hasil.",
+    "education": "Pendidikan",
+    "experience": "Pengalaman kerja",
+    "projects": "Proyek",
+    "noSkills": "Tambahkan minimal satu keterampilan agar bisa dicocokkan.",
+    "addSkillLabel": "Tambah keterampilan",
+    "addSkillHelper": "Contoh: Python, SQL, Figma. Pisahkan dengan koma untuk menambah beberapa sekaligus.",
+    "addSkill": "Tambah",
+    "suggestions": "Sering diminta lowongan",
+    "addSuggestion": "Tambah {skill}",
+    "removeSkill": "Hapus keterampilan {skill}",
+    "removed": "{skill} dihapus.",
+    "undo": "Urungkan",
+    "submit": "Cari pekerjaan yang cocok",
+    "matching": "Mencocokkan...",
+    "retry": "Coba lagi",
+    "matchFailed": "Pencocokan gagal. Silakan coba lagi.",
+    "errors": {
+      "skills": "Tambahkan minimal satu keterampilan."
+    },
+    "nameHelper": "Opsional. Nama tidak dipakai untuk menghitung skor.",
+    "skillOptions": "Daftar keterampilan dari lowongan"
+  },
+  "Match": {
+    "band": {
+      "strong": "Cocok",
+      "partial": "Sebagian",
+      "weak": "Perlu banyak belajar"
+    },
+    "reason": {
+      "strong": "Anda sudah memenuhi {matched} dari {total} keterampilan yang dibutuhkan.",
+      "partial": "Anda memenuhi {matched} dari {total} keterampilan yang dibutuhkan. Sisanya bisa dipelajari.",
+      "weak": "Anda baru memenuhi {matched} dari {total} keterampilan. Lowongan ini butuh banyak belajar."
+    },
+    "scoreLabel": "Skor kecocokan",
+    "outOf": "/100",
+    "srScore": "{score} dari 100, {band}",
+    "sample": "Contoh",
+    "breakdownTitle": "Cara skor ini dihitung",
+    "skillPart": "Keterampilan: {matched} dari {total}",
+    "textPart": "Pengalaman dan proyek: {level}",
+    "textLevel": {
+      "high": "sangat mirip",
+      "some": "cukup mirip",
+      "low": "sedikit mirip",
+      "empty": "belum diisi"
+    },
+    "points": "{points} dari {max} poin",
+    "compact": "{skill} poin dari keterampilan + {text} poin dari pengalaman dan proyek",
+    "breakdownNote": "Skor adalah jumlah dua bagian: keterampilan yang cocok (maks. 60 poin) dan kemiripan pendidikan, pengalaman, serta proyek Anda dengan deskripsi lowongan (maks. 40 poin).",
+    "addText": "Isi pengalaman atau proyek untuk menambah hingga 40 poin"
+  },
+  "Results": {
+    "title": "Lowongan terdekat dengan profil Anda",
+    "subtitle": "{count, plural, other {# lowongan}} teratas. Skor menunjukkan seberapa dekat profil Anda, dan keterampilan yang belum ada menjadi langkah belajar berikutnya.",
+    "few": "Ada {count, plural, other {# lowongan}} yang cukup dekat dengan profil Anda. Menambah keterampilan membuka lebih banyak pilihan.",
+    "rank": "Peringkat {rank}",
+    "closest": "Paling dekat dengan profil Anda",
+    "openSteps": "Lihat langkah belajar",
+    "others": "Lowongan lainnya",
+    "matchedCount": "{count} cocok",
+    "missingCount": "{count} perlu dipelajari",
+    "gapTitle": "Mulai belajar dari sini",
+    "gapHintShared": "Keterampilan ini dibutuhkan di beberapa lowongan sekaligus, jadi mempelajarinya membuka paling banyak pilihan.",
+    "gapHintTop": "Ini langkah berikutnya untuk {title}, lowongan yang paling dekat dengan profil Anda.",
+    "matched": "Sudah Anda kuasai",
+    "missing": "Perlu dipelajari",
+    "editProfile": "Ubah profil",
+    "emptyTitle": "Belum ada lowongan yang cukup dekat",
+    "emptyHint": "Coba tambahkan keterampilan atau lengkapi pengalaman Anda.",
+    "neededIn": "dibutuhkan di {count, plural, other {# lowongan}}",
+    "copyPlan": "Salin rencana belajar",
+    "copied": "Rencana belajar disalin. Tempel ke catatan atau chat Anda.",
+    "copyFailed": "Browser tidak mengizinkan menyalin. Coba lagi atau catat keterampilan di atas.",
+    "copyHint": "Tidak disimpan di mana pun.",
+    "planHeading": "Rencana belajar saya (SkillMatch AI)",
+    "planFor": "Lowongan terdekat: {title}",
+    "planLine": "{skill}: dibutuhkan di {count, plural, other {# lowongan}}",
+    "planNote": "Dibuat dari data lowongan contoh yang sintetis."
+  },
+  "Detail": {
+    "back": "Kembali ke hasil",
+    "reasonLabel": "Alasan",
+    "nextTitle": "Langkah berikutnya",
+    "nextHint": "{count, plural, other {# keterampilan}} yang bisa dipelajari agar profil Anda lebih dekat dengan lowongan ini.",
+    "allMet": "Profil Anda sudah memenuhi semua keterampilan yang dibutuhkan. Lihat lowongan lain di daftar hasil.",
+    "haveTitle": "Sudah Anda kuasai",
+    "noneMatched": "Belum ada keterampilan yang cocok.",
+    "escoNote": "Nama keterampilan disamakan dengan standar ESCO (daftar keterampilan dari Uni Eropa), sehingga \"JS\" dan \"JavaScript\" dihitung sama.",
+    "feedbackQuestion": "Apakah kecocokan ini membantu?",
+    "yes": "Ya",
+    "no": "Tidak",
+    "feedbackThanks": "Terima kasih atas masukan Anda.",
+    "learn": "Cari materi",
+    "learnAria": "Cari materi belajar {skill} (buka tab baru)",
+    "navLabel": "Lowongan lain",
+    "prev": "Sebelumnya",
+    "next": "Berikutnya"
+  }
+}

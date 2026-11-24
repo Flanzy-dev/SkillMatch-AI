@@ -1,0 +1,182 @@
+{
+  "Meta": {
+    "title": "SkillMatch AI",
+    "description": "Upload your CV to see the jobs closest to your skills, why each one fits, and what to learn next.",
+    "ogAlt": "SkillMatch AI: know what fits, know what to learn next."
+  },
+  "Common": {
+    "skipToContent": "Skip to main content",
+    "brand": "SkillMatch AI",
+    "tagline": "Know what fits. Know what to learn next.",
+    "language": "Language",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "synthetic": "Sample data: these jobs and companies are synthetic, not real openings."
+  },
+  "Nav": {
+    "home": "Home",
+    "upload": "Upload CV",
+    "results": "Results",
+    "primary": "Main navigation"
+  },
+  "Footer": {
+    "note": "MVP prototype. Job listings are synthetic and not real openings."
+  },
+  "Landing": {
+    "title": "Find jobs that fit your <mark>skills</mark>",
+    "subtitle": "Not sure what to learn first? Upload your CV. AI reads your skills, then shows the closest jobs and which skills to learn next.",
+    "ctaPrimary": "Upload CV",
+    "ctaSample": "Try a sample profile",
+    "ctaManual": "Enter profile manually",
+    "privacy": "Your CV is not stored. It only lives in this browser session.",
+    "stepsLabel": "How it works",
+    "step1": "Upload your CV",
+    "step1Desc": "PDF, up to 5 MB. No CV? Enter your profile yourself.",
+    "step2": "Check your profile",
+    "step2Desc": "Fix any skill we misread and add the ones we missed.",
+    "step3": "See what to learn",
+    "step3Desc": "Your closest jobs, why each scored as it did, and the skills to learn.",
+    "previewLabel": "Sample of the results view. Synthetic data, not a real opening.",
+    "sampleCompany": "Sample Company"
+  },
+  "Stepper": {
+    "label": "Search steps",
+    "upload": "Upload",
+    "review": "Review profile",
+    "results": "Results",
+    "compact": "Step {current} of {total}",
+    "skipped": "skipped"
+  },
+  "Upload": {
+    "title": "Upload your CV",
+    "subtitle": "AI reads your CV and fills in your profile. You can still correct it before matching.",
+    "dropTitle": "Drag a PDF file here",
+    "dropHint": "PDF only, up to 5 MB",
+    "chooseFile": "Choose PDF file",
+    "extracting": "Reading your CV...",
+    "extractingHint": "Usually takes under 15 seconds.",
+    "cancel": "Cancel",
+    "retry": "Try again",
+    "manualPrompt": "No CV in PDF format?",
+    "manualLink": "Enter your profile manually",
+    "privacy": "Your CV is not stored. It only lives in this browser session.",
+    "error": {
+      "type": "The file must be a PDF.",
+      "size": "The file is larger than 5 MB.",
+      "extract": "We could not read this CV. Try again or enter your profile manually."
+    }
+  },
+  "Review": {
+    "title": "Review your profile",
+    "subtitle": "Check what we read from your CV, then add or remove skills.",
+    "subtitleManual": "Enter your skills to start matching with jobs.",
+    "subtitleSample": "This is a sample profile. Replace it with your own skills before matching.",
+    "name": "Name",
+    "foundTitle": "We found {count, plural, one {# skill} other {# skills}}",
+    "emptyTitle": "No skills found yet",
+    "manualTitle": "Your skills",
+    "skillsHint": "These skills are what gets matched against jobs.",
+    "details": "Other details (optional)",
+    "detailsHint": "Education, experience, and projects help refine the results.",
+    "education": "Education",
+    "experience": "Work experience",
+    "projects": "Projects",
+    "noSkills": "Add at least one skill so we can match you.",
+    "addSkillLabel": "Add a skill",
+    "addSkillHelper": "Examples: Python, SQL, Figma. Separate with commas to add several at once.",
+    "addSkill": "Add",
+    "suggestions": "Often requested by jobs",
+    "addSuggestion": "Add {skill}",
+    "removeSkill": "Remove skill {skill}",
+    "removed": "{skill} removed.",
+    "undo": "Undo",
+    "submit": "Find matching jobs",
+    "matching": "Matching...",
+    "retry": "Try again",
+    "matchFailed": "Matching failed. Please try again.",
+    "errors": {
+      "skills": "Add at least one skill."
+    },
+    "nameHelper": "Optional. Your name is not used for the score.",
+    "skillOptions": "Skills from the job listings"
+  },
+  "Match": {
+    "band": {
+      "strong": "Strong fit",
+      "partial": "Partial fit",
+      "weak": "A lot to learn"
+    },
+    "reason": {
+      "strong": "You already meet {matched} of {total} required skills.",
+      "partial": "You meet {matched} of {total} required skills. The rest can be learned.",
+      "weak": "You meet {matched} of {total} skills so far. This job needs a lot of learning."
+    },
+    "scoreLabel": "Match score",
+    "outOf": "/100",
+    "srScore": "{score} out of 100, {band}",
+    "sample": "Sample",
+    "breakdownTitle": "How this score adds up",
+    "skillPart": "Skills: {matched} of {total}",
+    "textPart": "Experience and projects: {level}",
+    "textLevel": {
+      "high": "very similar",
+      "some": "fairly similar",
+      "low": "a little similar",
+      "empty": "not filled in"
+    },
+    "points": "{points} of {max} points",
+    "compact": "{skill} points from skills + {text} points from experience and projects",
+    "breakdownNote": "The score adds two parts: matching skills (up to 60 points) and how similar your education, experience and projects are to the job description (up to 40 points).",
+    "addText": "Add experience or projects to earn up to 40 points"
+  },
+  "Results": {
+    "title": "Jobs closest to your profile",
+    "subtitle": "Top {count, plural, one {# job} other {# jobs}}. The score shows how close your profile is, and the skills you do not have yet are your next steps.",
+    "few": "{count, plural, one {# job is} other {# jobs are}} close enough to your profile. Adding skills opens up more options.",
+    "rank": "Rank {rank}",
+    "closest": "Closest to your profile",
+    "openSteps": "See what to learn",
+    "others": "Other jobs",
+    "matchedCount": "{count} matched",
+    "missingCount": "{count} to learn",
+    "gapTitle": "Start learning here",
+    "gapHintShared": "Several jobs ask for these skills, so learning them opens the most options.",
+    "gapHintTop": "These are the next steps for {title}, the job closest to your profile.",
+    "matched": "Skills you have",
+    "missing": "Skills to learn",
+    "editProfile": "Edit profile",
+    "emptyTitle": "No jobs are close enough yet",
+    "emptyHint": "Try adding skills or completing your experience.",
+    "neededIn": "asked for in {count, plural, one {# job} other {# jobs}}",
+    "copyPlan": "Copy learning plan",
+    "copied": "Learning plan copied. Paste it into your notes or a chat.",
+    "copyFailed": "Your browser blocked copying. Try again or note the skills above.",
+    "copyHint": "Nothing is stored anywhere.",
+    "planHeading": "My learning plan (SkillMatch AI)",
+    "planFor": "Closest job: {title}",
+    "planLine": "{skill}: asked for in {count, plural, one {# job} other {# jobs}}",
+    "planNote": "Made from synthetic sample job data."
+  },
+  "Detail": {
+    "back": "Back to results",
+    "reasonLabel": "Reason",
+    "nextTitle": "Next steps",
+    "nextHint": "{count, plural, one {# skill} other {# skills}} you can learn to get closer to this job.",
+    "allMet": "Your profile already meets every required skill. Check the other jobs in your results.",
+    "haveTitle": "Skills you have",
+    "noneMatched": "No matching skills yet.",
+    "escoNote": "Skill names are matched to the ESCO standard (the EU skills list), so \"JS\" and \"JavaScript\" count as the same.",
+    "feedbackQuestion": "Was this match helpful?",
+    "yes": "Yes",
+    "no": "No",
+    "feedbackThanks": "Thanks for your feedback.",
+    "learn": "Find learning material",
+    "learnAria": "Find learning material for {skill} (opens in a new tab)",
+    "navLabel": "Other jobs",
+    "prev": "Previous",
+    "next": "Next"
+  }
+}
