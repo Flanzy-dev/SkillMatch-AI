@@ -1,12 +1,21 @@
 import { allSkills } from "./mock-data/jobs";
 import { normalizeSkill } from "./scoring";
 
-const canonical = allSkills();
-const known = new Map(canonical.map((s) => [normalizeSkill(s), s]));
+const defaultCanonical = allSkills();
+const defaultKnown = new Map(defaultCanonical.map((s) => [normalizeSkill(s), s]));
+
+export function buildKnownSkillsMap(catalog: string[]): Map<string, string> {
+  const map = new Map(defaultKnown);
+  for (const s of catalog) {
+    map.set(normalizeSkill(s), s);
+  }
+  return map;
+}
 
 /** True when some listing asks for this skill (after alias normalization). */
-export function isKnownSkill(skill: string): boolean {
-  return known.has(normalizeSkill(skill));
+export function isKnownSkill(skill: string, customKnown?: Map<string, string>): boolean {
+  const map = customKnown || defaultKnown;
+  return map.has(normalizeSkill(skill));
 }
 
 function distance(a: string, b: string): number {
@@ -27,14 +36,15 @@ function distance(a: string, b: string): number {
  * The listing's name closest to an unknown skill, for a "did you mean" hint: a name that
  * contains it or is contained by it, else one or two typos away. Null when nothing is close.
  */
-export function closestSkill(skill: string): string | null {
+export function closestSkill(skill: string, customKnown?: Map<string, string>): string | null {
+  const map = customKnown || defaultKnown;
   const s = normalizeSkill(skill);
-  if (s.length < 2 || known.has(s)) return null;
-  for (const [key, name] of known) {
+  if (s.length < 2 || map.has(s)) return null;
+  for (const [key, name] of map) {
     if (s.length >= 3 && (key.includes(s) || s.includes(key)) && key.length >= 2) return name;
   }
   let best: { name: string; d: number } | null = null;
-  for (const [key, name] of known) {
+  for (const [key, name] of map) {
     const d = distance(s, key);
     if (d <= (s.length >= 6 ? 2 : 1) && (!best || d < best.d)) best = { name, d };
   }

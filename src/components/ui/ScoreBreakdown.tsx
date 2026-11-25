@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import type { MatchResult } from "@/lib/schemas/match";
 import { WEIGHTS } from "@/lib/scoring";
@@ -12,7 +12,8 @@ const TEXT_MAX = 100 * WEIGHTS.text;
  */
 export function ScoreBreakdown({ result, compact = false }: { result: MatchResult; compact?: boolean }) {
   const m = useTranslations("Match");
-  const { skillPoints, textPoints, textLevel } = result.breakdown;
+  const locale = useLocale() as "id" | "en";
+  const { skillPoints, textPoints, textLevel, textComparison } = result.breakdown;
 
   if (compact) {
     return (
@@ -44,12 +45,29 @@ export function ScoreBreakdown({ result, compact = false }: { result: MatchResul
         {rows.map((r) => (
           <div
             key={r.key}
-            className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5 border-b border-border py-2 last:border-b-0"
+            className="border-b border-border py-2.5 last:border-b-0"
           >
-            <dt className="text-sm">{r.label}</dt>
-            <dd className="text-sm font-semibold tabular-nums">
-              {m("points", { points: r.points, max: r.max })}
-            </dd>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
+              <dt className="text-sm font-medium">{r.label}</dt>
+              <dd className="text-sm font-semibold tabular-nums">
+                {m("points", { points: r.points, max: r.max })}
+              </dd>
+            </div>
+            {r.key === "text" && textComparison && (
+              <div className="mt-2.5 rounded-lg border border-border/80 bg-surface-subtle/50 p-3 text-xs leading-relaxed">
+                <p className="font-semibold text-foreground mb-1.5">{m("comparisonTitle")}</p>
+                <ul className="space-y-1.5 text-muted">
+                  <li className="flex items-start gap-1.5">
+                    <span className="font-medium text-foreground shrink-0">• {m("experienceComparisonLabel")}:</span>
+                    <span>{textComparison.experience[locale]}</span>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <span className="font-medium text-foreground shrink-0">• {m("projectsComparisonLabel")}:</span>
+                    <span>{textComparison.projects[locale]}</span>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         ))}
       </dl>

@@ -7,8 +7,8 @@ import { useTranslations } from "next-intl";
 import { AlertCircle, ChevronDown, Info, Plus } from "lucide-react";
 import { z } from "zod";
 import { useRouter } from "@/i18n/routing";
-import { api, DEMO_EXTRACTION } from "@/lib/api/mock";
-import { closestSkill, isKnownSkill } from "@/lib/skills";
+import { api, DEMO_EXTRACTION } from "@/lib/api";
+import { buildKnownSkillsMap, closestSkill, isKnownSkill } from "@/lib/skills";
 import { allSkills, popularSkills } from "@/lib/mock-data/jobs";
 import { emptyProfile, profileSchema, type Profile } from "@/lib/schemas/profile";
 import { useMatchFlow } from "@/hooks/useMatchFlow";
@@ -31,7 +31,23 @@ export default function ReviewPage() {
   const [removed, setRemoved] = useState<{ skill: string; index: number } | null>(null);
   const [submitError, setSubmitError] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [catalog, setCatalog] = useState<{ canonical: string[]; popular: string[] }>({
+    canonical: allSkills(),
+    popular: popularSkills(12),
+  });
   const skillInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    let active = true;
+    api.getSkillsCatalog().then((res) => {
+      if (active && res.canonical.length > 0) {
+        setCatalog(res);
+      }
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const form = useForm<Profile>({ resolver: zodResolver(formSchema), defaultValues: emptyProfile });
   const { register, handleSubmit, setValue, watch, reset, formState } = form;
@@ -54,13 +70,14 @@ export default function ReviewPage() {
   const manual = skippedUpload && !sample;
   // While extraction is mocked, a "CV" profile is really a sample: say so.
   const demoCv = ready && source === "cv" && DEMO_EXTRACTION;
-  const unknown = skills.filter((s) => !isKnownSkill(s));
+  const knownMap = useMemo(() => buildKnownSkillsMap(catalog.canonical), [catalog.canonical]);
+  const unknown = useMemo(() => skills.filter((s) => !isKnownSkill(s, knownMap)), [skills, knownMap]);
   const [education, experience, projects] = watch(["education", "experience", "projects"]);
   const hasDetails = Boolean(`${education}${experience}${projects}`.trim());
-  const skillOptions = useMemo(() => allSkills().filter((s) => !has(skills, s)), [skills]);
+  const skillOptions = useMemo(() => catalog.canonical.filter((s) => !has(skills, s)), [catalog.canonical, skills]);
   const suggestions = useMemo(
-    () => popularSkills(12).filter((s) => !has(skills, s)).slice(0, 6),
-    [skills],
+    () => catalog.popular.filter((s) => !has(skills, s)).slice(0, 6),
+    [catalog.popular, skills],
   );
 
   function setSkills(next: string[]) {
@@ -159,7 +176,7 @@ export default function ReviewPage() {
                 <li key={s}>
                   <SkillChip
                     size="lg"
-                    unknown={!isKnownSkill(s)}
+                    unknown={!isKnownSkill(s, knownMap)}
                     unknownLabel={t("unknownSr")}
                     label={s}
                     removeLabel={t("removeSkill", { skill: s })}
@@ -179,7 +196,7 @@ export default function ReviewPage() {
                 </p>
                 <ul className="-ml-2 flex flex-wrap gap-x-1">
                   {unknown.map((s) => {
-                    const near = closestSkill(s);
+                    const near = closestSkill(s, knownMap);
                     return near ? (
                       <li key={s}>
                         <button

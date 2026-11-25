@@ -18,6 +18,13 @@ export type ReasonCode = "strong" | "partial" | "weak";
 /** How closely the experience, projects and education text matches the listing. */
 export type TextLevel = "high" | "some" | "low" | "empty";
 
+/** Detailed comparison points for experience and projects. */
+export const textComparisonSchema = z.object({
+  experience: localizedText,
+  projects: localizedText,
+});
+export type TextComparison = z.infer<typeof textComparisonSchema>;
+
 /** The two parts of the score, so the UI can show how it adds up. */
 const breakdownSchema = z.object({
   /** Out of 60: share of the listing's skills the profile has. */
@@ -25,6 +32,7 @@ const breakdownSchema = z.object({
   /** Out of 40: overlap between the profile text and the listing text. */
   textPoints: z.number().int().min(0).max(40),
   textLevel: z.enum(["high", "some", "low", "empty"]),
+  textComparison: textComparisonSchema.optional(),
 });
 
 export const matchResultSchema = z.object({

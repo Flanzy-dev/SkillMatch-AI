@@ -14,7 +14,7 @@
     "themeDark": "Gelap",
     "menu": "Menu",
     "closeMenu": "Tutup menu",
-    "synthetic": "Contoh: lowongan dan perusahaan di sini sintetis, bukan lowongan nyata."
+    "synthetic": "Data lowongan dikurasi dari lowongan kerja nyata di Indonesia."
   },
   "Nav": {
     "home": "Beranda",
@@ -23,7 +23,7 @@
     "primary": "Navigasi utama"
   },
   "Footer": {
-    "note": "Prototipe MVP. Data lowongan bersifat sintetis dan bukan lowongan nyata."
+    "note": "SkillMatch AI. Platform pencocokan lowongan berbasis keahlian dengan integrasi AI."
   },
   "Landing": {
     "title": "Temukan pekerjaan yang cocok dengan <mark>keterampilan</mark> Anda",
@@ -39,7 +39,7 @@
     "step2Desc": "Perbaiki keterampilan yang salah terbaca atau tambahkan yang kurang.",
     "step3": "Hasil dan langkah belajar",
     "step3Desc": "Lowongan terdekat, alasan skornya, dan keterampilan yang perlu dipelajari.",
-    "previewLabel": "Contoh tampilan hasil. Data sintetis, bukan lowongan nyata.",
+    "previewLabel": "Pratinjau tampilan hasil pencocokan pekerjaan.",
     "sampleCompany": "Perusahaan Contoh"
   },
   "Stepper": {
@@ -136,6 +136,9 @@
     "points": "{points} dari {max} poin",
     "compact": "{skill} poin dari keterampilan + {text} poin dari pengalaman dan proyek",
     "breakdownNote": "Skor adalah jumlah dua bagian: keterampilan yang cocok (maks. 60 poin) dan kemiripan pendidikan, pengalaman, serta proyek Anda dengan deskripsi lowongan (maks. 40 poin).",
+    "comparisonTitle": "Hasil perbandingan pengalaman & proyek:",
+    "experienceComparisonLabel": "Pengalaman",
+    "projectsComparisonLabel": "Proyek",
     "addText": "Isi pengalaman atau proyek untuk menambah hingga 40 poin"
   },
   "Results": {
@@ -164,7 +167,7 @@
     "planHeading": "Rencana belajar saya (SkillMatch AI)",
     "planFor": "Lowongan terdekat: {title}",
     "planLine": "{skill}: dibutuhkan di {count, plural, other {# lowongan}}",
-    "planNote": "Dibuat dari data lowongan contoh yang sintetis."
+    "planNote": "Disusun berdasarkan analisis kebutuhan lowongan pekerjaan nyata."
   },
   "Detail": {
     "back": "Kembali ke hasil",

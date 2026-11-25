@@ -14,7 +14,7 @@
     "themeDark": "Dark",
     "menu": "Menu",
     "closeMenu": "Close menu",
-    "synthetic": "Sample data: these jobs and companies are synthetic, not real openings."
+    "synthetic": "Job listings are curated from real job vacancies in Indonesia."
   },
   "Nav": {
     "home": "Home",
@@ -23,7 +23,7 @@
     "primary": "Main navigation"
   },
   "Footer": {
-    "note": "MVP prototype. Job listings are synthetic and not real openings."
+    "note": "SkillMatch AI. Skill-based job matching powered by AI."
   },
   "Landing": {
     "title": "Find jobs that fit your <mark>skills</mark>",
@@ -39,7 +39,7 @@
     "step2Desc": "Fix any skill we misread and add the ones we missed.",
     "step3": "Results and what to learn",
     "step3Desc": "Your closest jobs, why each scored as it did, and the skills to learn.",
-    "previewLabel": "Sample of the results view. Synthetic data, not a real opening.",
+    "previewLabel": "Preview of job matching results.",
     "sampleCompany": "Sample Company"
   },
   "Stepper": {
@@ -136,6 +136,9 @@
     "points": "{points} of {max} points",
     "compact": "{skill} points from skills + {text} points from experience and projects",
     "breakdownNote": "The score adds two parts: matching skills (up to 60 points) and how similar your education, experience and projects are to the job description (up to 40 points).",
+    "comparisonTitle": "Experience & projects comparison:",
+    "experienceComparisonLabel": "Experience",
+    "projectsComparisonLabel": "Projects",
     "addText": "Add experience or projects to earn up to 40 points"
   },
   "Results": {
@@ -164,7 +167,7 @@
     "planHeading": "My learning plan (SkillMatch AI)",
     "planFor": "Closest job: {title}",
     "planLine": "{skill}: asked for in {count, plural, one {# job} other {# jobs}}",
-    "planNote": "Made from synthetic sample job data."
+    "planNote": "Generated based on real job vacancy requirements."
   },
   "Detail": {
     "back": "Back to results",

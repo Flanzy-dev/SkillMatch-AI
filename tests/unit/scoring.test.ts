@@ -72,6 +72,45 @@ describe("text similarity", () => {
   });
 });
 
+describe("generateTextComparison", () => {
+  const seniorJob = {
+    id: "job-senior",
+    title: "Senior Backend Engineer",
+    company: "Scale Corp",
+    summary: {
+      id: "Membutuhkan minimal 5 tahun pengalaman membangun layanan REST API terdistribusi.",
+      en: "Requires at least 5 years of experience building distributed REST API services.",
+    },
+    skills: ["Python", "FastAPI", "PostgreSQL", "Docker", "REST API"],
+  };
+
+  it("compares candidate experience years against job requirement (e.g. 3 years vs 5 years)", () => {
+    const candidate3Years = {
+      ...emptyProfile,
+      skills: ["Python"],
+      experience: "Pengalaman 3 tahun sebagai Software Engineer backend.",
+      projects: "",
+    };
+    const r = scoreJob(candidate3Years, seniorJob);
+    expect(r.breakdown.textComparison).toBeDefined();
+    expect(r.breakdown.textComparison?.experience.id).toContain("5 tahun");
+    expect(r.breakdown.textComparison?.experience.id).toContain("3 tahun");
+    expect(r.breakdown.textComparison?.projects.id).toContain("setidaknya dalam 1 proyek");
+  });
+
+  it("identifies matching project domains when present", () => {
+    const candidateWithProject = {
+      ...emptyProfile,
+      skills: ["Python"],
+      experience: "Pengalaman 5 tahun sebagai Backend Engineer.",
+      projects: "Membangun sistem backend dan layanan REST API untuk e-commerce.",
+    };
+    const r = scoreJob(candidateWithProject, seniorJob);
+    expect(r.breakdown.textComparison?.experience.id).toContain("memenuhi syarat");
+    expect(r.breakdown.textComparison?.projects.id).toContain("relevan");
+  });
+});
+
 describe("rankJobs", () => {
   it("lists every job with at least one matching skill, even with a low score", () => {
     const ranked = rankJobs({ ...emptyProfile, skills: ["JS", "Postgres"] }, jobs);

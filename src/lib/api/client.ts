@@ -16,9 +16,15 @@ export interface ApiOptions {
   fail?: "extract" | "match";
 }
 
+export interface SkillsCatalog {
+  canonical: string[];
+  popular: string[];
+}
+
 /** Contract the UI depends on. Swap mock.ts for an HTTP client without touching pages. */
 export interface Api {
   extractCv(file: File, opts?: ApiOptions): Promise<Profile>;
   matchJobs(profile: Profile, opts?: ApiOptions): Promise<MatchResult[]>;
   submitFeedback(jobId: string, helpful: boolean): Promise<void>;
+  getSkillsCatalog(): Promise<SkillsCatalog>;
 }

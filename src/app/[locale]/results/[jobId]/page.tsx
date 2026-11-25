@@ -4,7 +4,7 @@ import { use, useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowLeft, ArrowRight, ExternalLink, Info, PartyPopper, Route } from "lucide-react";
 import { Link, useRouter } from "@/i18n/routing";
-import { api } from "@/lib/api/mock";
+import { api } from "@/lib/api";
 import { learnUrl } from "@/lib/learn";
 import { useMatchFlow } from "@/hooks/useMatchFlow";
 import { buttonClass, Button } from "@/components/ui/Button";
